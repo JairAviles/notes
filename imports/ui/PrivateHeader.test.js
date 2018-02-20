@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-import PrivateHeader from './PrivateHeader';
+import { PrivateHeader }  from './PrivateHeader';
 
 if(Meteor.isClient) {
     describe('PrivateHeader', function() {
