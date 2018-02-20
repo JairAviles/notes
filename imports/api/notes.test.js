@@ -69,7 +69,7 @@ if (Meteor.isServer) {
             const note = Notes.findOne({_id});
 
             expect(note.updatedAt).toBeGreaterThan(0);
-            expect(note).toMatchObject({
+            expect(note).toInclude({
                 title,
                 body: noteOne.body
             });
@@ -97,7 +97,7 @@ if (Meteor.isServer) {
 
             const note = Notes.findOne({_id});
 
-            expect(note).toMatchObject(noteOne);
+            expect(note).toInclude(noteOne);
         });
 
         it('should not update note if unauthenticated', function() {
@@ -120,12 +120,11 @@ if (Meteor.isServer) {
             expect(notes[0]).toEqual(noteOne);
         });
 
-        it('should return zero notes for user that has none', function() {
+        it('should return no notes for user that has none', function() {
             const res = Meteor.server.publish_handlers.notesPub.apply({ userId: 'anyInvalidId' });
             const notes = res.fetch();
 
             expect(notes.length).toBe(0);
-            expect(notes[0]).toBeUndefined();
         });
 
     });
