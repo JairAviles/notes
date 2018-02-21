@@ -1,32 +1,42 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { withTracker } from 'meteor/react-meteor-data';
 
 import { Link } from 'react-router-dom';
 import { Meter } from 'meteor/meteor';
 
-class Login extends React.Component {
+export class Login extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            error: this.props.error || ''
+            error: '',
+            email: '',
+            password: ''
         };
     }
 
     onSubmit(e) {
-        e.preventDefault();
+        let { email, password } = this.state;
 
-        let email = this.refs.email.value.trim();
-        let password = this.refs.password.value.trim();
+        e.preventDefault();
         
-        Meteor.loginWithPassword({email}, password, (err) => {
+        this.props.loginWithPassword({email}, password, (err) => {
             if (err) {
-                this.setState({error: err.reason});
+                this.setState({ error: 'Unable to login. Check email and password.' });
             } else {
-                this.setState({error: ''});
+                this.setState({ error: '' });
             }
         });
     }
+
+    onEmailChange(e) {
+        this.setState({ email: e.target.value.trim() })
+      }
+      onPasswordChange(e) {
+        this.setState({ password: e.target.value.trim() })
+      }
 
     componentWillMount() {
         if (Meteor.userId()) {
@@ -43,8 +53,8 @@ class Login extends React.Component {
                         {this.state.error ? <p>{this.state.error}</p> : undefined}
 
                         <form onSubmit={this.onSubmit.bind(this)} noValidate className="boxed-view__form">
-                            <input type="email" name="email" ref="email" placeholder="Email" />
-                            <input type="password" name="password" ref="password" placeholder="Password" />
+                            <input type="email" name="email" ref="email" placeholder="Email" onChange={this.onEmailChange.bind(this)} value={this.state.email} />
+                            <input type="password" name="password" ref="password" placeholder="Password" onChange={this.onPasswordChange.bind(this)} value={this.state.password} />
                             <button className="button">Login</button>
                         </form>
 
@@ -54,6 +64,14 @@ class Login extends React.Component {
             </div>
         );
     }
-}    
+}
 
-export default withRouter(Login);
+Login.propTypes = {
+    loginWithPassword: PropTypes.func.isRequired
+};
+
+export default withTracker(() => {
+    return {
+        loginWithPassword: Meteor.loginWithPassword
+    };
+})(Login);

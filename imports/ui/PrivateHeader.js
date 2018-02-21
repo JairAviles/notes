@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 
 import { Accounts } from 'meteor/accounts-base';
 
@@ -27,5 +26,3 @@ export default withTracker(() => {
         handleLogout: () => Accounts.logout()
     };
 })(PrivateHeader);
-
-//export default PrivateHeader;
