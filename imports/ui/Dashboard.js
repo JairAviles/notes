@@ -1,7 +1,8 @@
 import React from 'react';
 
 import NoteList from './NoteList';
-import PrivateHeader from './PrivateHeader'; 
+import PrivateHeader from './PrivateHeader';
+import Editor from './Editor';
 
 export default () => {
     return (
@@ -9,6 +10,7 @@ export default () => {
             <PrivateHeader title="Dashboard" />
             <div className="page-content">
                 <NoteList />
+                <Editor />
             </div>    
         </div>
     );
