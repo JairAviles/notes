@@ -30,6 +30,11 @@ export class Editor extends React.Component {
         this.props.call('notes.update', (this.props.note._id), { body });
     }
 
+    handleRemoval() {
+        this.props.call('notes.remove', this.props.note._id);
+        this.props.history.push('/dashboard');
+      }
+
     componentDidUpdate(prevProps, prevState) {
         const currentNoteId = this.props.note ? this.props.note._id : undefined;
         const prevNoteId = prevProps.note ? prevProps.note._id : undefined;
@@ -60,10 +65,7 @@ export class Editor extends React.Component {
                         value={this.state.body}
                         placeholder="Your note here!"
                         onChange={this.handleBodyChange.bind(this)}></textarea>
-                    <button onClick={() => {
-                        this.props.call('notes.remove', (this.props.note._id));
-                        this.props.history.push('/dashboard');
-                    }}>Delete Note</button>
+                    <button onClick={this.handleRemoval.bind(this)}>Delete Note</button>
                 </div>
             );
         } else {
