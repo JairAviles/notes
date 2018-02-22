@@ -1,18 +1,12 @@
 import { Meteor } from 'meteor/meteor';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Tracker } from 'meteor/tracker';
 import { Session } from 'meteor/session';
 
-import { routes, onAuthChanges } from '../imports/routes/routes';
+import { AppRouter, history } from '../imports/routes/AppRouter';
 import createBrowserHistory from 'history/createBrowserHistory'
 import './../imports/startup/simple-schema-configuration';
-
-const history = createBrowserHistory();
-
-Tracker.autorun(() => {
-    const isAuthenticated = !!Meteor.userId();
-    onAuthChanges(isAuthenticated);
-});
 
 Tracker.autorun(() => {
     const selectedNoteId = Session.get('selectedNoteId');
@@ -24,5 +18,5 @@ Tracker.autorun(() => {
 
 Meteor.startup(() => {
     Session.set('selectedNoteId', undefined);
-    ReactDOM.render(routes, document.getElementById('app'));
+    ReactDOM.render(<AppRouter />, document.getElementById('app'));
 });
