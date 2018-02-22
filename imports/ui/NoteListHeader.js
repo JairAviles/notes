@@ -12,7 +12,7 @@ export const NoteListHeader = (props) => {
             <button className="button" onClick={() => {
                 props.meteorCall('notes.insert', (err, res) => {
                     if (res) {
-                        console.log("Note inserted!");
+                        //console.log("Note inserted!");
                     }
                 });
             }}>Create Note</button>

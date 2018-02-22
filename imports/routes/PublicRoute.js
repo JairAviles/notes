@@ -1,5 +1,5 @@
 import React from 'react';
-import { withTracker, createContainer } from 'meteor/react-meteor-data';
+import { withTracker } from 'meteor/react-meteor-data';
 import { Route, Redirect } from 'react-router-dom';
 
 export const PublicRoute = ({
@@ -16,6 +16,8 @@ export const PublicRoute = ({
       )} />
     );
 
-export default createContainer(() => ({
-    isAuthenticated: !!Meteor.userId()
-  }), PublicRoute);
+  export default withTracker(() => {
+    return {
+      isAuthenticated: !!Meteor.userId()
+    };
+})(PublicRoute);
