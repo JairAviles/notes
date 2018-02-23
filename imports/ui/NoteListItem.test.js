@@ -7,7 +7,7 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 import { notes } from '../fixtures/fixtures';
-import NoteListItem from './NoteListItem';
+import { NoteListItem } from './NoteListItem';
 
 if(Meteor.isClient) {
     describe('NoteListItem', function() {
