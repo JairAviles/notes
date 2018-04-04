@@ -6,12 +6,12 @@
     "test": "meteor test --driver-package=cultofcoders:mocha"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.40",
+    "@babel/runtime": "^7.0.0-beta.44",
     "babel-runtime": "^6.26.0",
-    "meteor-node-stubs": "^0.3.2",
-    "moment": "^2.20.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "meteor-node-stubs": "^0.3.3",
+    "moment": "^2.22.0",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
     "react-router-dom": "^4.2.2",
     "simpl-schema": "^1.4.2"
   },
